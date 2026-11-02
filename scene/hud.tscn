@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://biy3c5gof8twc"]
+
+[ext_resource type="Script" uid="uid://cyvwoqi1326w3" path="res://script/hud.gd" id="1_o8u2p"]
+[ext_resource type="Texture2D" uid="uid://cn4uot0c3vvig" path="res://assets/UI/message.png" id="2_nhyt6"]
+[ext_resource type="Texture2D" uid="uid://becvcbarxbur0" path="res://assets/UI/gameover.png" id="2_pvgpj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ry2h7"]
+bg_color = Color(0, 0.827451, 0.18039216, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy82l"]
+bg_color = Color(0, 0.59607846, 0.11764706, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lky30"]
+bg_color = Color(0, 0.9137255, 0.20392157, 0.81960785)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xphas"]
+bg_color = Color(0, 0.827451, 0.18039216, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kc6cu"]
+bg_color = Color(0, 0.59607846, 0.11764706, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62he3"]
+bg_color = Color(0, 0.9137255, 0.20392157, 0.81960785)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvgpj"]
+bg_color = Color(0.5649617, 0.5649617, 0.5649615, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhyt6"]
+bg_color = Color(0.5330367, 0.5330367, 0.5330366, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjh6b"]
+bg_color = Color(0.6955031, 0.6955032, 0.6955029, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="HUD" type="CanvasLayer" unique_id=816299644]
+script = ExtResource("1_o8u2p")
+
+[node name="NewHighScore" type="Label" parent="." unique_id=1683978676]
+offset_top = 16.0
+offset_right = 288.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "NEW HIGH SCORE!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReadyImage" type="TextureRect" parent="." unique_id=583195789]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = 64.0
+offset_right = -52.0
+offset_bottom = -181.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nhyt6")
+stretch_mode = 3
+
+[node name="PlayButton" type="Button" parent="." unique_id=1676312394]
+offset_left = 64.0
+offset_top = 340.0
+offset_right = 224.0
+offset_bottom = 378.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ry2h7")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_qy82l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lky30")
+text = "MULAI"
+
+[node name="GameOverScreen" type="TextureRect" parent="." unique_id=1039270426]
+offset_left = 48.0
+offset_top = 86.0
+offset_right = 240.0
+offset_bottom = 128.0
+texture = ExtResource("2_pvgpj")
+
+[node name="FinalScoreLabel" type="Label" parent="." unique_id=1955083925]
+offset_left = 24.0
+offset_top = 155.0
+offset_right = 264.0
+offset_bottom = 191.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BestScoreLabel" type="Label" parent="." unique_id=1938836929]
+offset_left = 24.0
+offset_top = 207.0
+offset_right = 264.0
+offset_bottom = 239.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="." unique_id=511557199]
+offset_left = 64.0
+offset_top = 250.0
+offset_right = 224.0
+offset_bottom = 290.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_xphas")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kc6cu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_62he3")
+text = "RESTART"
+
+[node name="MenuButton" type="Button" parent="." unique_id=1906223019]
+offset_left = 64.0
+offset_top = 300.0
+offset_right = 224.0
+offset_bottom = 340.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_pvgpj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nhyt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sjh6b")
+text = "MENU"
+
+[node name="ScoreDigits" type="Node2D" parent="." unique_id=371569801]
+position = Vector2(144, 44)

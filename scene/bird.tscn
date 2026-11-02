@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c71hw7khh8ets"]
+
+[ext_resource type="Texture2D" uid="uid://c6nrilvc60ifu" path="res://assets/Game Objects/yellowbird-upflap.png" id="1_4j8m0"]
+[ext_resource type="Script" uid="uid://b0ohd3vstjafk" path="res://script/bird.gd" id="1_586km"]
+[ext_resource type="Texture2D" uid="uid://diohjpeftvteu" path="res://assets/Game Objects/yellowbird-midflap.png" id="2_586km"]
+[ext_resource type="Texture2D" uid="uid://bsceokk18lekv" path="res://assets/Game Objects/yellowbird-downflap.png" id="3_n1efg"]
+[ext_resource type="AudioStream" uid="uid://b7nwvib4yervm" path="res://assets/Sound Efects/wing.ogg" id="5_n1efg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61k8b"]
+atlas = ExtResource("1_4j8m0")
+region = Rect2(0, 0, 34, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq55c"]
+atlas = ExtResource("2_586km")
+region = Rect2(0, 0, 34, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk7sb"]
+atlas = ExtResource("3_n1efg")
+region = Rect2(0, 0, 34, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvkl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61k8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq55c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk7sb")
+}],
+"loop": 1,
+"name": &"play",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ll5lq"]
+radius = 9.0
+height = 28.0
+
+[node name="Bird" type="CharacterBody2D" unique_id=1893083277]
+script = ExtResource("1_586km")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=26815963]
+sprite_frames = SubResource("SpriteFrames_lvkl0")
+animation = &"play"
+frame_progress = 0.95524025
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604213145]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ll5lq")
+
+[node name="WingAudio" type="AudioStreamPlayer" parent="." unique_id=212007274]
+stream = ExtResource("5_n1efg")

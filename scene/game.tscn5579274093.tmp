@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d0fbmg2ix3ycw"]
+
+[ext_resource type="Texture2D" uid="uid://qp45ygl4hi6f" path="res://assets/Game Objects/background-day.png" id="1_5kiuu"]
+[ext_resource type="Script" uid="uid://dtfcq713lal0r" path="res://script/game.gd" id="1_xlg7c"]
+[ext_resource type="PackedScene" uid="uid://c71hw7khh8ets" path="res://scene/bird.tscn" id="2_dbls1"]
+[ext_resource type="Texture2D" uid="uid://cfnag6cvjrrnb" path="res://assets/Game Objects/base.png" id="4_xwcet"]
+[ext_resource type="PackedScene" uid="uid://biy3c5gof8twc" path="res://scene/hud.tscn" id="5_p1ry8"]
+[ext_resource type="AudioStream" uid="uid://7lp3pfo0ie6o" path="res://assets/Sound Efects/point.ogg" id="6_ll5lq"]
+[ext_resource type="AudioStream" uid="uid://6pieggkn0a6b" path="res://assets/Sound Efects/hit.ogg" id="7_17rxn"]
+[ext_resource type="AudioStream" uid="uid://bc07k0jb1oay6" path="res://assets/Sound Efects/swoosh.ogg" id="8_yq8tf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvkl0"]
+size = Vector2(288, 8)
+
+[node name="Game" type="Node2D" unique_id=1174807838]
+script = ExtResource("1_xlg7c")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=958275879]
+position = Vector2(144, 256)
+texture = ExtResource("1_5kiuu")
+
+[node name="Bird" parent="." unique_id=563962555 instance=ExtResource("2_dbls1")]
+position = Vector2(144, 242)
+rotation_speed = null
+min_rotation_deg = null
+max_rotation_deg = null
+start_position = null
+
+[node name="Ground" type="Node2D" parent="." unique_id=602733247]
+z_index = 1
+position = Vector2(0, 12)
+
+[node name="BaseLeft" type="Sprite2D" parent="Ground" unique_id=2144280622]
+position = Vector2(144, 456)
+texture = ExtResource("4_xwcet")
+
+[node name="BaseRight" type="Sprite2D" parent="Ground" unique_id=1908393490]
+position = Vector2(480, 456)
+texture = ExtResource("4_xwcet")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1102534793]
+position = Vector2(0, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1532219626]
+position = Vector2(144, 400)
+shape = SubResource("RectangleShape2D_lvkl0")
+
+[node name="TimerPipa" type="Timer" parent="." unique_id=472993898]
+wait_time = 1.4
+
+[node name="HUD" parent="." unique_id=816299644 instance=ExtResource("5_p1ry8")]
+
+[node name="Pipes" type="Node2D" parent="." unique_id=797008882]
+
+[node name="PointAudio" type="AudioStreamPlayer" parent="." unique_id=285908334]
+stream = ExtResource("6_ll5lq")
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="." unique_id=1599130219]
+stream = ExtResource("7_17rxn")
+
+[node name="SwooshAudio" type="AudioStreamPlayer" parent="." unique_id=387376734]
+stream = ExtResource("8_yq8tf")
