@@ -11,7 +11,7 @@ enum BirdState {
 	LANDED
 }
 
-const START_POSITION := Vector2(144.0, 256.0)
+const START_POSITION := Vector2(960.0, 590.0)
 const FLAP_SPEED := 350.0
 const FALL_SPEED := 100.0
 const MAX_FALL_SPEED := 900.0

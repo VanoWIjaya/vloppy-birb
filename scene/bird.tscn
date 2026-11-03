@@ -40,15 +40,18 @@ radius = 9.0
 height = 28.0
 
 [node name="Bird" type="CharacterBody2D" unique_id=1893083277]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_586km")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=26815963]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_lvkl0")
 animation = &"play"
 frame_progress = 0.95524025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604213145]
 rotation = 1.5707964
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CapsuleShape2D_ll5lq")
 
 [node name="WingAudio" type="AudioStreamPlayer" parent="." unique_id=212007274]

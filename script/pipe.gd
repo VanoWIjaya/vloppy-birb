@@ -14,8 +14,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position.x -= speed * delta
 	
-	if position.x < -180:
-		queue_free()
 
 func _on_score_area_body_entered(body: Node2D) -> void:
 	if not (body is Bird):
@@ -26,3 +24,6 @@ func _on_score_area_body_entered(body: Node2D) -> void:
 		
 	score_claimed = true
 	scored.emit()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

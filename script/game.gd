@@ -65,13 +65,12 @@ func _physics_process(delta: float) -> void:
 	for tile in ground.get_children():
 		tile.position.x -= BASE_SPEED * delta
 		
-		if tile.position.x <= -168.0:
-			tile.position.x += 672.0
-	
-	if bird.global_position.y < -25.0:
-		_end_game()
-	elif bird.position.y > 430.0:
-		_end_game()
+		if tile.position.x <= -500:
+			tile.position.x += 3955
+	#if bird.global_position.y < -25.0:
+		#_end_game()
+	#elif bird.position.y > 430.0:
+		#_end_game()
 
 func _on_bird_hit() -> void:
 	_end_game()
@@ -86,8 +85,10 @@ func _start_game() -> void:
 	score = 0
 	hud.set_score(score)
 	
-	$Ground/BaseLeft.position.x = 144.0
-	$Ground/BaseRight.position.x = 480.0
+	$Ground/BaseLeft.position.x = 432.0
+	$Ground/BaseCenterLeft.position.x = 1440.0
+	$Ground/BaseCenterRight.position.x = 2447.0
+	$Ground/BaseRight.position.x = 3455.0
 	
 	bird.start_flight()
 	
@@ -127,7 +128,7 @@ func _spawn_pipe() -> void:
 	
 	pipes.position = Vector2(
 		288.0 - 144.0 + 70.0,
-		randf_range(-40.0, 40.0)
+		randf_range(-60.0, 60.0)
 	)
 	
 	pipe.add_child(pipes)
