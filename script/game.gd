@@ -38,6 +38,7 @@ func _ready() -> void:
 	hud.play_pressed.connect(_start_game)
 	hud.restart_pressed.connect(_start_game)
 	hud.menu_pressed.connect(_return_to_menu)
+	hud.quit_pressed.connect(_quit_game)
 	
 	_load_best_score()
 	
@@ -61,16 +62,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if gameState != GameState.PLAY:
 		return
-		
+	
+	var screen_size = get_viewport().size
+	
 	for tile in ground.get_children():
 		tile.position.x -= BASE_SPEED * delta
 		
 		if tile.position.x <= -500:
 			tile.position.x += 3955
-	#if bird.global_position.y < -25.0:
-		#_end_game()
-	#elif bird.position.y > 430.0:
-		#_end_game()
+
+	if bird.position.y > screen_size.y:
+		_end_game()
 
 func _on_bird_hit() -> void:
 	_end_game()
@@ -120,14 +122,18 @@ func _end_game() -> void:
 		
 	hud.show_game_over(score, best_score, isNewBest)
 
+func _quit_game() -> void:
+	get_tree().quit()
+
 func _spawn_pipe() -> void:
 	if gameState != GameState.PLAY:
 		return
 	
 	var pipes := PIPE_SCENE.instantiate() as PipeController
+	var viewport_width = get_viewport().size.x
 	
 	pipes.position = Vector2(
-		288.0 - 144.0 + 70.0,
+		viewport_width - 144.0 + 70.0,
 		randf_range(-60.0, 60.0)
 	)
 	

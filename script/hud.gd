@@ -4,6 +4,7 @@ extends CanvasLayer
 signal play_pressed
 signal restart_pressed
 signal menu_pressed
+signal quit_pressed
 
 @onready var scoreLabel: Node2D = $ScoreDigits
 @onready var readyImage: TextureRect = $ReadyImage
@@ -14,14 +15,14 @@ signal menu_pressed
 @onready var restartButton: Button = $RestartButton
 @onready var menuButton: Button = $MenuButton
 @onready var newHighSCore: Label = $NewHighScore
-
-
+@onready var quitButton: Button = $QuitButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playButton.pressed.connect(_on_play_pressed)
 	restartButton.pressed.connect(_on_restart_pressed)
 	menuButton.pressed.connect(_on_menu_pressed)
+	quitButton.pressed.connect(_on_quit_pressed)
 	
 	show_ready(0)
 
@@ -63,6 +64,7 @@ func show_ready(bestScore: int) -> void:
 	scoreLabel.hide()
 	readyImage.show()
 	playButton.show()
+	quitButton.show()
 	
 	gameOverImages.hide()
 	finalScoreLabel.hide()
@@ -77,6 +79,7 @@ func show_playing() -> void:
 	scoreLabel.show()
 	readyImage.hide()
 	playButton.hide()
+	quitButton.hide()
 	
 	gameOverImages.hide()
 	finalScoreLabel.hide()
@@ -94,6 +97,7 @@ func show_game_over(finalScore: int, bestScore: int, newBestScore: bool) -> void
 	scoreLabel.hide()
 	readyImage.hide()
 	playButton.hide()
+	quitButton.hide()
 	
 	gameOverImages.show()
 	finalScoreLabel.show()
@@ -107,10 +111,11 @@ func show_game_over(finalScore: int, bestScore: int, newBestScore: bool) -> void
 func _on_play_pressed() -> void:
 	play_pressed.emit()
 
-
 func _on_menu_pressed() -> void:
 	menu_pressed.emit()
 
-
 func _on_restart_pressed() -> void:
 	restart_pressed.emit()
+
+func _on_quit_pressed() -> void:
+	quit_pressed.emit()
