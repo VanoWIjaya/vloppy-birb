@@ -3,7 +3,7 @@ extends Node2D
 
 signal scored
 
-@export var speed: float = 150.0
+@export var speed: float = 10000.0
 
 var score_claimed: bool = false
 

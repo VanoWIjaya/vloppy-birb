@@ -11,8 +11,7 @@ enum BirdState {
 	LANDED
 }
 
-const START_POSITION := Vector2(960.0, 590.0)
-const FLAP_SPEED := 350.0
+const FLAP_SPEED := 400.0
 const FALL_SPEED := 100.0
 const MAX_FALL_SPEED := 900.0
 
@@ -118,8 +117,9 @@ func _handle_hit() -> void:
 
 func reset_bird() -> void:
 	state = BirdState.IDLE
-
-	global_position = START_POSITION
+	var posisi = get_viewport().get_visible_rect().size / 2
+	
+	global_position = posisi
 	velocity = Vector2.ZERO
 	rotation_degrees = 0.0
 

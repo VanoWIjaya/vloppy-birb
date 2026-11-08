@@ -9,42 +9,64 @@
 [ext_resource type="AudioStream" uid="uid://6pieggkn0a6b" path="res://assets/Sound Efects/hit.ogg" id="7_17rxn"]
 [ext_resource type="AudioStream" uid="uid://bc07k0jb1oay6" path="res://assets/Sound Efects/swoosh.ogg" id="8_yq8tf"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pvgpj"]
-distance = -84.95
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll5lq"]
+size = Vector2(4027, 331)
 
 [node name="Game" type="Node2D" unique_id=1174807838]
 script = ExtResource("1_xlg7c")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=958275879]
+[node name="Background" type="Node2D" parent="." unique_id=680050972]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=958275879]
 position = Vector2(302.5, 537.7778)
 scale = Vector2(2.1, 2.1)
 texture = ExtResource("1_5kiuu")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1088456725]
+[node name="Sprite2D2" type="Sprite2D" parent="Background" unique_id=1088456725]
 position = Vector2(880.5002, 537.77783)
 scale = Vector2(2.1, 2.1)
 texture = ExtResource("1_5kiuu")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1095206072]
+[node name="Sprite2D3" type="Sprite2D" parent="Background" unique_id=1095206072]
 position = Vector2(1461.4, 536.6)
 scale = Vector2(2.1, 2.1)
 texture = ExtResource("1_5kiuu")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=689531693]
+[node name="Sprite2D4" type="Sprite2D" parent="Background" unique_id=689531693]
 position = Vector2(1610, 537)
 scale = Vector2(2.1, 2.1)
 texture = ExtResource("1_5kiuu")
 metadata/_edit_lock_ = true
 
-[node name="Bird" parent="." unique_id=563962555 instance=ExtResource("2_dbls1")]
-position = Vector2(960, 589)
+[node name="Sprite2D9" type="Sprite2D" parent="Background" unique_id=764156547]
+position = Vector2(1169.5001, 537.7778)
+scale = Vector2(2.1, 2.1)
+texture = ExtResource("1_5kiuu")
 
-[node name="Ground" type="Node2D" parent="." unique_id=602733247]
+[node name="Sprite2D10" type="Sprite2D" parent="Background" unique_id=1349125711]
+position = Vector2(1747.5004, 537.77783)
+scale = Vector2(2.1, 2.1)
+texture = ExtResource("1_5kiuu")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Background" unique_id=1074483025]
+position = Vector2(2328.4, 536.6)
+scale = Vector2(2.1, 2.1)
+texture = ExtResource("1_5kiuu")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Background" unique_id=1599770357]
+position = Vector2(2477, 537)
+scale = Vector2(2.1, 2.1)
+texture = ExtResource("1_5kiuu")
+
+[node name="Bird" parent="." unique_id=563962555 instance=ExtResource("2_dbls1")]
+position = Vector2(540, 589)
+
+[node name="Ground" type="AnimatableBody2D" parent="." unique_id=973068842]
 z_index = 1
-position = Vector2(24, 525)
+position = Vector2(24, 558)
 
 [node name="BaseLeft" type="Sprite2D" parent="Ground" unique_id=2144280622]
 position = Vector2(433, 456)
@@ -66,12 +88,9 @@ position = Vector2(3455, 456)
 scale = Vector2(3, 3)
 texture = ExtResource("4_xwcet")
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=1102534793]
-position = Vector2(0, 12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1532219626]
-position = Vector2(152, 713)
-shape = SubResource("WorldBoundaryShape2D_pvgpj")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1532219626]
+position = Vector2(1943.5, 458.5)
+shape = SubResource("RectangleShape2D_ll5lq")
 one_way_collision = true
 
 [node name="TimerPipa" type="Timer" parent="." unique_id=472993898]

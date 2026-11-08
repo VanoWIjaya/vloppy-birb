@@ -10,13 +10,12 @@ const PIPE_SCENE: PackedScene = preload("res://scene/pipe.tscn")
 const SAVE_PATH: String = "user://vloppy_birb.cfg"
 
 const PIPE_INTERVAL: float = 1.5
-const PIPE_SPEED: float = 150.0
-const BASE_SPEED: float = 100.0
+const PIPE_SPEED: float = 200.0
 
 @onready var bird: Bird = $Bird
 @onready var pipe: Node2D = $Pipes
 @onready var pipeTimer: Timer = $TimerPipa
-@onready var ground: Node2D = $Ground
+@onready var ground: AnimatableBody2D = $Ground
 @onready var hud: HUDController = $HUD
 @onready var pointAudio :AudioStreamPlayer = $PointAudio
 @onready var hitAudio :AudioStreamPlayer = $HitAudio
@@ -31,7 +30,6 @@ var best_score: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
-	
 	bird.hit.connect(_on_bird_hit)
 	pipeTimer.timeout.connect(_spawn_pipe)
 	
@@ -40,8 +38,8 @@ func _ready() -> void:
 	hud.menu_pressed.connect(_return_to_menu)
 	hud.quit_pressed.connect(_quit_game)
 	
+	_apply_vertical_layout()
 	_load_best_score()
-	
 	bird.reset_bird()
 	hud.show_ready(best_score)
 
@@ -62,17 +60,19 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if gameState != GameState.PLAY:
 		return
-	
-	var screen_size = get_viewport().size
-	
-	for tile in ground.get_children():
-		tile.position.x -= BASE_SPEED * delta
+	#var center_y = get_viewport().get_visible_rect().size.y
+	#var window_size = DisplayServer.window_get_size()
+	#if window_size.x < window_size.y:
+		#$Background.position.y = center_y * 0.5
+	_apply_vertical_layout()
 		
+	for tile in ground.get_children():
+		#tile.position.y = center_y * 0.5
+		if tile is CollisionShape2D:
+			continue
+		tile.position.x -= PIPE_SPEED * delta
 		if tile.position.x <= -500:
 			tile.position.x += 3955
-
-	if bird.position.y > screen_size.y:
-		_end_game()
 
 func _on_bird_hit() -> void:
 	_end_game()
@@ -80,9 +80,9 @@ func _on_bird_hit() -> void:
 func _start_game() -> void:
 	if gameState == GameState.PLAY:
 		return
-		
-	bird.reset_bird()
+	
 	_clear_pipes()
+	bird.reset_bird()
 	
 	score = 0
 	hud.set_score(score)
@@ -125,18 +125,48 @@ func _end_game() -> void:
 func _quit_game() -> void:
 	get_tree().quit()
 
+func _apply_vertical_layout() -> void:
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+
+	# Jalankan pengaturan ini hanya untuk layar portrait.
+	if viewport_size.x >= viewport_size.y:
+		return
+
+	var offset_y: float = viewport_size.y * 0.5
+
+	# Pindahkan parent.
+	ground.position.y = offset_y
+	$Background.position.y = offset_y
+	pipe.scale = Vector2(2.0, 2.0)
+	bird.scale = Vector2(3.0, 3.0)
+	hud.scoreLabel.scale = Vector2(2.0, 2.0)
+	hud.gameOverImages.position.y = viewport_size.y / 4
+	
+	# Pindahkan seluruh anak Ground.
+	for child in ground.get_children():
+		if child is Node2D:
+			child.position.y = offset_y
+
 func _spawn_pipe() -> void:
 	if gameState != GameState.PLAY:
 		return
 	
 	var pipes := PIPE_SCENE.instantiate() as PipeController
-	var viewport_width = get_viewport().size.x
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+
+	var offset_y: float = viewport_size.y / 2 
 	
-	pipes.position = Vector2(
-		viewport_width - 144.0 + 70.0,
-		randf_range(-60.0, 60.0)
-	)
-	
+	if viewport_size.x <= viewport_size.y:
+		pipes.position = Vector2(
+			viewport_size.x / 4,
+			offset_y / 6
+			- randf_range(-60.0, 60.0)
+		)
+	else:
+		pipes.position = Vector2(
+			viewport_size.x - 144.0,
+			randf_range(-60.0, 60.0)
+		)
 	pipe.add_child(pipes)
 	
 	pipes.speed = PIPE_SPEED

@@ -57,8 +57,11 @@ func set_score(value: int) -> void:
 			+ digit_width / 2.0
 			+ i * (digit_width + spacing)
 		)
-		
 		scoreLabel.add_child(digit)
+
+func _process(delta: float) -> void:
+	var posisi = get_viewport().get_visible_rect().size.x / 2
+	scoreLabel.position.x = posisi
 
 func show_ready(bestScore: int) -> void:
 	scoreLabel.hide()
